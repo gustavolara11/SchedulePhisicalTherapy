@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <nav class="nav_top">
+      <a href="../index.html">Home</a><a href="patient.html">Patients</a
+      ><a href="#">Schedule</a><a href="finances.html">Finances</a
+      ><a href="admin.html">Admin</a>
+    </nav>
+    <main>
+      <div class="buttons">
+        <button id="schedule_button">to Schedule</button>
+      </div>
+      <div class="form_schedule">
+        <h1>New Schedule</h1>
+        <form action="">
+          <label for="name">Name:</label>
+          <select name="name" id="patient_name">
+            <option value=""></option>
+          </select>
+          <label for="date">Date:</label>
+          <input type="date" name="date" id="date" />
+          <label for="time">Time:</label>
+          <input
+            type="number"
+            name="time"
+            id="time"
+            step="1"
+            min="8"
+            max="19"
+          />
+          <input type="submit" value="Submit" />
+          <button id="back_button">Back</button>
+        </form>
+      </div>
+      <div class="card_container2">
+        <h1 id="month"></h1>
+        <table class="calendar">
+          <thead class="table_head">
+            <tr>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+              <th>Sunday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+            </tr>
+            <tr>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+  <script src="../JS/schedule.js"></script>
+</html>

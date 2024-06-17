@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <nav class="nav_top">
+      <a href="../index.html">Home</a><a href="#">Patients</a
+      ><a href="Schedule.html">Schedule</a><a href="finances.html">Finances</a
+      ><a href="admin.html">Admin</a>
+    </nav>
+    <main>
+      <div class="buttons">
+        <button id="cad_button">New Patient</button>
+        <button id="search_button">Search</button>
+      </div>
+      <div class="new_client_form">
+        <h1>Register new patient</h1>
+        <form action="../Controller/cad.php" method="post">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" required />
+          <label for="birthday">Birthday</label>
+          <input type="date" name="birthday" id="birthday" required />
+          <label for="adress">Adress:</label>
+          <input type="text" name="adress" id="adress" />
+          <label for="city">City:</label>
+          <input type="text" name="city" id="city" />
+          <label for="phone">Phone:</label>
+          <input type="tel" name="phone" id="phone" />
+          <input type="submit" value="Register" />
+          <input type="button" value="Back" id="back_button" />
+        </form>
+      </div>
+      <div class="search_form">
+        <form action="../Controller/cad.php" method="POST">
+          <label for="search">Patient name:</label>
+          <input type="search" name="search" id="search" />
+          <input type="submit" value="Search" />
+          <input type="button" value="Back" id="back_button2" />
+        </form>
+      </div>
+
+      <!-- Lista de clientes -->
+    </main>
+  </body>
+  <script src="../JS/patient.js"></script>
+</html>
