@@ -15,6 +15,8 @@ class Connection {
     }
   }
   public function queryC($sql){
+    echo $sql;
+    // exit;
     $query = mysqli_query($this->getCon(), $sql);
   }
   public function queryR($sql){
@@ -27,11 +29,6 @@ class Connection {
   public function queryD($sql){
     $query = mysqli_query($this->getCon(), $sql);
   }
-
-
-
-
 }
-
 
 ?>

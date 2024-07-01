@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patients</title>
     <link rel="stylesheet" href="../style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <nav class="nav_top">
@@ -19,7 +24,7 @@
       </div>
       <div class="new_client_form">
         <h1>Register new patient</h1>
-        <form action="../Controller/cad.php" method="post">
+        <form action="../API/Controller/cad.php" method="post">
           <label for="name">Name:</label>
           <input type="text" name="name" id="name" required />
           <label for="birthday">Birthday</label>
@@ -35,15 +40,25 @@
         </form>
       </div>
       <div class="search_form">
-        <form action="../Controller/cad.php" method="POST">
+        <form action="../api/Controller/cad.php" method="POST">
           <label for="search">Patient name:</label>
           <input type="search" name="search" id="search" />
           <input type="submit" value="Search" />
           <input type="button" value="Back" id="back_button2" />
         </form>
       </div>
-
       <!-- Lista de clientes -->
+      <div class="patients_table_container">
+        <table class="patients_table">
+          <tr>
+            <th>Patient</th>
+            <th>Adress</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Edit / Delete</th>
+          </tr>
+        </table>
+      </div>
     </main>
   </body>
   <script src="../JS/patient.js"></script>

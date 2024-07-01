@@ -43,3 +43,5 @@ function closeForm() {
   let closeform = document.querySelector("div.search_form");
   closeform.style.display = "none";
 }
+// Display Patients Table
+function displayTable() {} // parei aqui, começando a melhorar a API pra retornar um JSON.\z

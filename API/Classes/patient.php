@@ -19,7 +19,7 @@ class Patient {
   }
   public function save(){
     $connection = new Connection;
-    $sql = "INSERT INTO `patients`(`name`, `birthday`, `adress`, `city`, `phone`) VALUES ('".$this->getName()."','".$this->getBirthday()."','".$this->getAdress()."','".$this->getCity()."','".$this->getPhone()."')";
+    $sql = "INSERT INTO `patients`(`id`, `name`, `birthday`, `adress`, `city`, `phone`) VALUES (NULL,'".$this->getName()."','".$this->getBirthday()."','".$this->getAdress()."','".$this->getCity()."','".$this->getPhone()."');";
     $connection->queryC($sql);
   }
   public function load($id){
