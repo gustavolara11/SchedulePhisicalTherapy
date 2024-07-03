@@ -57,6 +57,10 @@ function arryMonth(dayNumber, dayWeek, lastDay) {
     let arryDay = i;
     aryMonth.push(arryDay);
   }
+  // for (let i = 1; i <= dayNumber; i++) {
+  //   let arryDay = i;
+  //   aryMonth.push(arryDay);
+  // } // adicionar dias dos mes seguinte
 }
 arryMonth(firstDate, firstDay, lastDay);
 
@@ -67,9 +71,12 @@ function renderCalendar(arry, lastday, dayweek) {
     list += `<li id="cDay${i}">${arry[i]}</li>`;
   }
   daysCalendar.innerHTML = list;
+}
+function colorLasMonth(dayweek) {
   for (let i = 0; i >= dayweek; i++) {
-    let render = document.getElementById("cDay" + i + "");
-    render.style.color = "red"; //faltar arrumar cor pra mais transparente
+    let render = document.querySelector(`#cDay${i}`);
+    render.style.color = "#999"; //faltar arrumar cor pra mais transparente
   }
 }
 renderCalendar(aryMonth, lastDay, firstDay);
+colorLasMonth(firstDay);

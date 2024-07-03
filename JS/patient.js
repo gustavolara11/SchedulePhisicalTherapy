@@ -45,3 +45,42 @@ function closeForm() {
 }
 // Display Patients Table
 function displayTable() {} // parei aqui, começando a melhorar a API pra retornar um JSON.\z
+
+function register() {
+  var name2 = document.querySelector("#name").value;
+  var birthday = document.querySelector("#birthday").value;
+  var adress = document.querySelector("#adress").value;
+  var city = document.querySelector("#city").value;
+  var phone = document.querySelector("#phone").value;
+
+  let closebuttons = document.querySelector("div.buttons");
+  closebuttons.style.display = "flex";
+
+  let closeForm = document.querySelector("div.new_client_form");
+  closeForm.style.display = "none";
+
+  var data = {
+    name: name2,
+    birthday: birthday,
+    adress: adress,
+    city: city,
+    phone: phone,
+    operation: create,
+  };
+
+  // Enviando os dados via AJAX
+  $.ajax({
+    url: "../api/endpoint.php",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(data),
+    success: function (response) {
+      // Sucesso ao enviar os dados
+      console.log("Dados enviados com sucesso:", response);
+    },
+    error: function (error) {
+      // Erro ao enviar os dados
+      console.error("Erro ao enviar dados:", error);
+    },
+  });
+}
