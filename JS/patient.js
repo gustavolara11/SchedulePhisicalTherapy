@@ -44,7 +44,32 @@ function closeForm() {
   closeform.style.display = "none";
 }
 // Display Patients Table
-function displayTable() {} // parei aqui, começando a melhorar a API pra retornar um JSON.\z
+async function displayTable() {
+  const data = { operation: "list" };
+  const response = await fetch("../api/endpoint.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    const jsonData = response.json();
+    console.log(jsonData);
+    var list = document.querySelector("#patients_list");
+    jsonData.forEach((element) => {
+      const listItem = document.createElement("li");
+      listItem.innerHTML =
+        element.name +
+        element.birthday +
+        element.address +
+        element.city +
+        element.phone;
+      list.appendChild(listItem);
+      console.log(listItem);
+    });
+  });
+}
+displayTable();
 
 function register() {
   var name2 = document.querySelector("#name").value;
@@ -52,6 +77,7 @@ function register() {
   var adress = document.querySelector("#adress").value;
   var city = document.querySelector("#city").value;
   var phone = document.querySelector("#phone").value;
+  var operation = "create";
 
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "flex";
@@ -65,7 +91,7 @@ function register() {
     adress: adress,
     city: city,
     phone: phone,
-    operation: create,
+    operation: operation,
   };
 
   // Enviando os dados via AJAX
@@ -84,3 +110,31 @@ function register() {
     },
   });
 }
+
+// function displayTable() {
+//   $(document).ready(() => {
+//     var data = { operation: "list" };
+//     $.ajax({
+//       url: "../api/endpoint.php",
+//       type: "POST",
+//       contentType: "application/json",
+//       data: JSON.stringify(data),
+//       success: function (response) {
+//         console.log(response);
+//         var list = document.querySelector("#patients_list");
+//         var jsonData = response;
+//         jsonData.forEach((element) => {
+//           list.innerHTML =
+//             element.name +
+//             element.birthday +
+//             element.adress +
+//             element.city +
+//             element.phone;
+//         });
+//       },
+//       error: function (error) {
+//         console.error("Erro ao enviar dados:", error);
+//       },
+//     });
+//   });
+// }

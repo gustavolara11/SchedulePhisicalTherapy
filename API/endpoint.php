@@ -1,35 +1,50 @@
 <?php
 require_once 'classes/patient.php';
 
-// $operation = $_POST['operation'];
-// $json = $_POST['json'];
+// Recebendo os dados JSON do POST
+$data = file_get_contents('php://input');
+$json_data = json_decode($data, true);
+header('Content-Type: application/json');
+// Verificando se os dados foram recebidos corretamente
+if ($json_data) {
+    $name = $json_data['name'] ?? '';
+    $birthday = $json_data['birthday'] ?? '';
+    $adress = $json_data['adress'] ?? '';
+    $city = $json_data['city'] ?? '';
+    $phone = $json_data['phone'] ?? '';
+    $operation = $json_data['operation'] ?? '';
+} else {
+    // Enviar uma resposta de erro ao cliente
+    echo json_encode(['status' => 'error', 'message' => 'Erro ao receber dados']);
+}
 
-// switch($operation) {
-//   case 'create': // receber o JSON para cadastro do paciente
-//     $item = json_decode($json);
+switch($operation) {
+  case 'create': // receber o JSON para cadastro do paciente
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $newP->save();   
+    break;
+  case 'list':// receber o JSON para mostrar Todos os pacientes
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $data = $newP->load();
+    $jsonData = json_encode($data);
+    echo $jsonData;   
+    break; 
+  case 'read':// receber o JSON para pesquisar o paciente
     
-//     $newP = new Patient($item->name, $item->birthday, $item->adress, $item->city, $item->phone);
-//     $newP->save();
-//     break;
-//   case 'read':// receber o JSON para pesquisar o paciente
-//     $item = json_decode($json);
+    break;
+   
+  case 'update': // receber o JSON para atualizar o paciente
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $newP->save();
+    break;
+  case 'delete': // receber o JSON para deletar o Paciente
+    # code...
+    break;
+  default:
+    //
+    break;
+};
 
-//     $newP = new Patient('','','','','');
-//     $newP->load($item);
-//     break;
-//   case 'readAll':// receber o JSON para mostrar Todos os pacientes
-//     # code...
-//     break;  
-//   case 'update': // receber o JSON para atualizar o paciente
-//     # code...
-//     break;
-//   case 'delete': // receber o JSON para deletar o Paciente
-//     # code...
-//     break;
-//   default:
-//     # code...
-//     break;
-// };
 
 // $name = 'lara';
 // $pt = new Patient('','','','','');
@@ -52,27 +67,4 @@ require_once 'classes/patient.php';
 
 // mandar o JSON para exibir tds os pacientes
 
-?>
-<?php
-// Recebendo os dados JSON do POST
-$data = file_get_contents('php://input');
-$json_data = json_decode($data, true);
-
-// Verificando se os dados foram recebidos corretamente
-if ($json_data) {
-    $name = $json_data['name'];
-    $birthday = $json_data['birthday'];
-    $adress = $json_data['adress'];
-    $city = $json_data['city'];
-    $phone = $json_data['phone'];
-
-    $newP = new Patient($name, $birthday, $adress, $city, $phone);
-    $newP->save();
-
-    // Enviar uma resposta de volta ao cliente
-    echo json_encode(['status' => 'success', 'message' => 'Dados recebidos com sucesso']);
-} else {
-    // Enviar uma resposta de erro ao cliente
-    echo json_encode(['status' => 'error', 'message' => 'Erro ao receber dados']);
-}
 ?>

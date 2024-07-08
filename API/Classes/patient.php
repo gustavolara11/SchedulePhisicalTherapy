@@ -17,12 +17,16 @@ class Patient {
       $this->setCity($city);
       $this->setPhone($phone);
   }
-  public function save(){
+  public function save($id=NULL){
     $connection = new Connection;
-    $sql = "INSERT INTO `patients`(`id`, `name`, `birthday`, `adress`, `city`, `phone`) VALUES (NULL,'".$this->getName()."','".$this->getBirthday()."','".$this->getAdress()."','".$this->getCity()."','".$this->getPhone()."');";
+    if($id=NULL){
+      $sql = "INSERT INTO `patients`(`id`, `name`, `birthday`, `adress`, `city`, `phone`) VALUES (NULL,'".$this->getName()."','".$this->getBirthday()."','".$this->getAdress()."','".$this->getCity()."','".$this->getPhone()."');";
+    }else{
+      $sql = "UPDATE `patients` SET `name` = ".$this->getName().", `birthday` = ".$this->getBirthday().", `adress` = ".$this->getAdress().", `city` = ".$this->getCity().", `phone` = ".$this->getPhone()." WHERE `id` = ".$id.";";
+    }
     $connection->queryC($sql);
   }
-  public function load($id){
+  public function load($id=" "){
     $connection = new Connection;
     $sql = "SELECT * FROM `patients` WHERE `name` LIKE '%$id%'";
     $query = $connection->queryR($sql);
