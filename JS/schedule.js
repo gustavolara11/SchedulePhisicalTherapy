@@ -7,6 +7,21 @@ function openForm() {
   let button = document.querySelector("div.buttons");
   button.style.display = "none";
 }
+// Buttons
+let button = document.querySelector("div.buttons");
+button.addEventListener("click", clickButton);
+
+function clickButton() {
+  let buttons = document.querySelectorAll(".init_button");
+  buttons.forEach(function (openB) {
+    if (openB.style.display == "none" || openB.style.display == "") {
+      openB.style.display = "flex";
+      openB.style.height = "50px";
+    } else {
+      openB.style.display = "none";
+    }
+  });
+}
 // desenvolver o calendario
 const dayName = [
   "sunday",

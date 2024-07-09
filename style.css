@@ -178,6 +178,73 @@ main {
   background-color: #f3f3f3;
   box-shadow: 1px 1px 10px #e7e7e7;
 }
+.but_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: auto;
+  min-height: 100px;
+  position: fixed;
+  bottom: 6%;
+  right: 3%;
+  caret-color: transparent;
+  z-index: 1;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  bottom: 6%;
+  right: 3%;
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
+  background-color: forestgreen;
+  cursor: pointer;
+  caret-color: transparent;
+  z-index: 1;
+}
+.buttons p {
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-align: center;
+  font-size: 36px;
+  line-height: 50px;
+  position: fixed;
+}
+.init_button {
+  display: none;
+  width: 50px;
+  height: 60px; /* não esta funcionando */
+  position: relative;
+  margin: 20px 0;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  line-height: 50px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.25);
+  background-color: forestgreen;
+  animation: open 800ms ease forwards;
+}
+@keyframes open {
+  0% {
+    transform: rotateX(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(360deg);
+    opacity: 1;
+    translate: 0 -80px;
+  }
+}
 #month {
   text-align: center;
   color: #666;

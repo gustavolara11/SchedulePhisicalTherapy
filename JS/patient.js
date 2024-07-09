@@ -43,6 +43,21 @@ function closeForm() {
   let closeform = document.querySelector("div.search_form");
   closeform.style.display = "none";
 }
+// Buttons
+let button = document.querySelector("div.buttons");
+button.addEventListener("click", clickButton);
+
+function clickButton() {
+  let buttons = document.querySelectorAll(".init_button");
+  buttons.forEach(function (openB) {
+    if (openB.style.display == "none" || openB.style.display == "") {
+      openB.style.display = "flex";
+      openB.style.height = "50px";
+    } else {
+      openB.style.display = "none";
+    }
+  });
+}
 // Display Patients Table
 async function displayTable() {
   const data = { operation: "list" };
@@ -52,33 +67,18 @@ async function displayTable() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then((response) => {
-    const jsonData = response.json();
-    console.log(jsonData);
-    var list = document.querySelector("#patients_list");
-    jsonData.forEach((element) => {
-      const listItem = document.createElement("li");
-      listItem.innerHTML =
-        element.name +
-        element.birthday +
-        element.address +
-        element.city +
-        element.phone;
-      list.appendChild(listItem);
-      console.log(listItem);
-    });
   });
+  const jsonData = await response.json();
+
+  var list = document.querySelector(".patients_list");
+  list.innerHTML = "";
+  for (i = 0; i < jsonData.length; i++) {
+    list.innerHTML += `<tr><td>${jsonData[i].name}</td><td>${jsonData[i].birthday}</td><td>${jsonData[i].adress}</td><td>${jsonData[i].city}</td><td>${jsonData[i].phone}</td><td><button id='${jsonData[i].id}' class='updateP'>Update</button> / <button onclick='deleteP(${jsonData[i].id})'>Delete</button></td></tr>`;
+  }
 }
-displayTable();
+document.addEventListener("DOMContentLoaded", displayTable);
 
 function register() {
-  var name2 = document.querySelector("#name").value;
-  var birthday = document.querySelector("#birthday").value;
-  var adress = document.querySelector("#adress").value;
-  var city = document.querySelector("#city").value;
-  var phone = document.querySelector("#phone").value;
-  var operation = "create";
-
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "flex";
 
@@ -86,55 +86,34 @@ function register() {
   closeForm.style.display = "none";
 
   var data = {
-    name: name2,
-    birthday: birthday,
-    adress: adress,
-    city: city,
-    phone: phone,
-    operation: operation,
+    name: document.querySelector("#name").value,
+    birthday: document.querySelector("#birthday").value,
+    adress: document.querySelector("#adress").value,
+    city: document.querySelector("#city").value,
+    phone: document.querySelector("#phone").value,
+    operation: "create",
   };
 
-  // Enviando os dados via AJAX
-  $.ajax({
-    url: "../api/endpoint.php",
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(data),
-    success: function (response) {
-      // Sucesso ao enviar os dados
-      console.log("Dados enviados com sucesso:", response);
+  const response = fetch("../api/endpoint.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-    error: function (error) {
-      // Erro ao enviar os dados
-      console.error("Erro ao enviar dados:", error);
-    },
+    body: JSON.stringify(data),
   });
 }
-
-// function displayTable() {
-//   $(document).ready(() => {
-//     var data = { operation: "list" };
-//     $.ajax({
-//       url: "../api/endpoint.php",
-//       type: "POST",
-//       contentType: "application/json",
-//       data: JSON.stringify(data),
-//       success: function (response) {
-//         console.log(response);
-//         var list = document.querySelector("#patients_list");
-//         var jsonData = response;
-//         jsonData.forEach((element) => {
-//           list.innerHTML =
-//             element.name +
-//             element.birthday +
-//             element.adress +
-//             element.city +
-//             element.phone;
-//         });
-//       },
-//       error: function (error) {
-//         console.error("Erro ao enviar dados:", error);
-//       },
-//     });
-//   });
-// }
+// não funcionou o add event com query selector all
+function deleteP($id) {
+  var data = {
+    id: $id,
+    operation: "delete",
+  };
+  const response = fetch("../api/endpoint.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  displayTable();
+}

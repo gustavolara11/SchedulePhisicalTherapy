@@ -26,9 +26,9 @@ class Patient {
     }
     $connection->queryC($sql);
   }
-  public function load($id=" "){
+  public function load($name=" "){
     $connection = new Connection;
-    $sql = "SELECT * FROM `patients` WHERE `name` LIKE '%$id%'";
+    $sql = "SELECT * FROM `patients` WHERE `name` LIKE '%$name%' ORDER BY `name`";
     $query = $connection->queryR($sql);
     if(empty($query) || $query->num_rows == 0){
       echo "Usuário não encontrado.";
@@ -37,8 +37,10 @@ class Patient {
     }
        
   }
-  public function delete(){
-
+  public function delete($id){
+    $connection = new Connection;
+    $sql = "DELETE FROM `patients` WHERE `id` = $id";
+    $query = $connection->queryD($sql);
   }
   public function getId(){
     return $this->id;

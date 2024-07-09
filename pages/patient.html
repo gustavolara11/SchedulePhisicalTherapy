@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Patients</title>
     <link rel="stylesheet" href="../style.css" />
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.js"
-      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-      crossorigin="anonymous"
-    ></script>
   </head>
   <body>
     <nav class="nav_top">
@@ -18,9 +13,12 @@
       ><a href="admin.html">Admin</a>
     </nav>
     <main>
-      <div class="buttons">
-        <button id="cad_button">New Patient</button>
-        <button id="search_button">Search</button>
+      <div class="but_container">
+        <div class="buttons" id="buttons">
+          <p>+</p>
+        </div>
+        <button class="init_button" id="cad_button">New Patient</button>
+        <button class="init_button" id="search_button">Search</button>
       </div>
       <div class="new_client_form">
         <h1>Register new patient</h1>
@@ -50,15 +48,18 @@
       <!-- Lista de clientes -->
       <div class="patients_table_container">
         <table class="patients_table">
-          <tr>
-            <th>Patient</th>
-            <th>Adress</th>
-            <th>City</th>
-            <th>Phone</th>
-            <th>Edit / Delete</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Birthday</th>
+              <th>Adress</th>
+              <th>City</th>
+              <th>Phone</th>
+              <th>Update / Delete</th>
+            </tr>
+          </thead>
+          <tbody class="patients_list"></tbody>
         </table>
-        <ul class="patients_list"></ul>
       </div>
     </main>
   </body>

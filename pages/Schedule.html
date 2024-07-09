@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Schedule</title>
     <link rel="stylesheet" href="../style.css" />
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.js"
-      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-      crossorigin="anonymous"
-    ></script>
   </head>
   <body>
     <nav class="nav_top">
@@ -18,8 +13,12 @@
       ><a href="admin.html">Admin</a>
     </nav>
     <main>
-      <div class="buttons">
-        <button id="schedule_button">to Schedule</button>
+      <div class="but_container">
+        <div class="buttons" id="buttons">
+          <p>+</p>
+        </div>
+        <button class="init_button" id="schedule_button">New</button>
+        <button class="init_button" id="update_button">Update</button>
       </div>
       <div class="form_schedule">
         <h1>New Schedule</h1>

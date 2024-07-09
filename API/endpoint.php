@@ -4,9 +4,10 @@ require_once 'classes/patient.php';
 // Recebendo os dados JSON do POST
 $data = file_get_contents('php://input');
 $json_data = json_decode($data, true);
-header('Content-Type: application/json');
+
 // Verificando se os dados foram recebidos corretamente
 if ($json_data) {
+    $id = $json_data['id'] ?? '';
     $name = $json_data['name'] ?? '';
     $birthday = $json_data['birthday'] ?? '';
     $adress = $json_data['adress'] ?? '';
@@ -17,7 +18,7 @@ if ($json_data) {
     // Enviar uma resposta de erro ao cliente
     echo json_encode(['status' => 'error', 'message' => 'Erro ao receber dados']);
 }
-
+header('Content-Type: application/json');
 switch($operation) {
   case 'create': // receber o JSON para cadastro do paciente
     $newP = new Patient($name, $birthday, $adress, $city, $phone);
@@ -29,16 +30,13 @@ switch($operation) {
     $jsonData = json_encode($data);
     echo $jsonData;   
     break; 
-  case 'read':// receber o JSON para pesquisar o paciente
-    
-    break;
-   
   case 'update': // receber o JSON para atualizar o paciente
     $newP = new Patient($name, $birthday, $adress, $city, $phone);
     $newP->save();
     break;
   case 'delete': // receber o JSON para deletar o Paciente
-    # code...
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $newP->delete($id); 
     break;
   default:
     //
