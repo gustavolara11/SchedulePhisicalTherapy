@@ -21,8 +21,9 @@
         <button class="init_button" id="search_button">Search</button>
       </div>
       <div class="new_client_form">
-        <h1>Register new patient</h1>
+        <h1 id="form_title">Register new patient</h1>
         <form action="" method="post">
+          <input type="hidden" name="id" id="idPatient" />
           <label for="name">Name:</label>
           <input type="text" name="name" id="name" required />
           <label for="birthday">Birthday</label>
@@ -33,8 +34,24 @@
           <input type="text" name="city" id="city" />
           <label for="phone">Phone:</label>
           <input type="tel" name="phone" id="phone" />
-          <input type="button" value="Register" onclick="register()" />
-          <input type="button" value="Back" id="back_button" />
+          <input
+            type="button"
+            value="Register"
+            id="register_button"
+            onclick="register()"
+          />
+          <input
+            type="button"
+            value="Update"
+            id="update_button"
+            onclick="updatePatient()"
+          />
+          <input
+            type="button"
+            value="Back"
+            class="back_button"
+            id="back_button"
+          />
         </form>
       </div>
       <div class="search_form">

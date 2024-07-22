@@ -1,9 +1,9 @@
 <?php 
 class Connection {
-  protected $ad = 'localhost';
+  protected $ad = 'db';
   protected $db = 'pt_cp';
   protected $log = 'root';
-  protected $pass = '';
+  protected $pass = 'root';
 
   public function __construct(){}
   
@@ -15,7 +15,6 @@ class Connection {
     }
   }
   public function queryC($sql){
-    echo $sql;
     $query = mysqli_query($this->getCon(), $sql);
   }
   public function queryR($sql){

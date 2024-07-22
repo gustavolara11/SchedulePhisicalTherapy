@@ -17,14 +17,21 @@ class Patient {
       $this->setCity($city);
       $this->setPhone($phone);
   }
-  public function save($id=NULL){
+  public function save(){
     $connection = new Connection;
-    if($id=NULL){
-      $sql = "INSERT INTO `patients`(`id`, `name`, `birthday`, `adress`, `city`, `phone`) VALUES (NULL,'".$this->getName()."','".$this->getBirthday()."','".$this->getAdress()."','".$this->getCity()."','".$this->getPhone()."');";
-    }else{
-      $sql = "UPDATE `patients` SET `name` = ".$this->getName().", `birthday` = ".$this->getBirthday().", `adress` = ".$this->getAdress().", `city` = ".$this->getCity().", `phone` = ".$this->getPhone()." WHERE `id` = ".$id.";";
-    }
+    $sql = "INSERT INTO `patients`(`id`, `name`, `birthday`, `adress`, `city`, `phone`) VALUES (NULL,'".$this->getName()."','".$this->getBirthday()."','".$this->getAdress()."','".$this->getCity()."','".$this->getPhone()."');";
     $connection->queryC($sql);
+  }
+  public function update($id){
+      $connection = new Connection;
+      $name = $this->getName();
+      $birthday = $this->getBirthday();
+      $adress = $this->getAdress();
+      $city = $this->getCity();
+      $phone = $this->getPhone();
+
+      $sql = "UPDATE `patients` SET `name` = '{$name}', `birthday` = '{$birthday}', `adress` = '{$adress}', `city` = '{$city}', `phone` = '{$phone}' WHERE `id` = '{$id}';";
+      $connection->queryU($sql);
   }
   public function load($name=" "){
     $connection = new Connection;
@@ -34,8 +41,17 @@ class Patient {
       echo "Usuário não encontrado.";
     }else{
       return mysqli_fetch_all($query, MYSQLI_ASSOC);
-    }
-       
+    }    
+  }
+  public function list(){
+    $connection = new Connection;
+    $sql = "SELECT * FROM `patients` ORDER BY `name`";
+    $query = $connection->queryR($sql);
+    if(empty($query) || $query->num_rows == 0){
+      echo "Usuário não encontrado.";
+    }else{
+      return mysqli_fetch_all($query, MYSQLI_ASSOC);
+    }    
   }
   public function delete($id){
     $connection = new Connection;
@@ -78,7 +94,5 @@ class Patient {
   public function setPhone($p){
     $this->phone = $p;
   }
-
 }
-
 ?>

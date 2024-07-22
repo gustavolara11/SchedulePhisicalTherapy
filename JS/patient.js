@@ -1,7 +1,8 @@
+document.addEventListener("DOMContentLoaded", displayTable);
+
 // Open Register Form
 let opencad = document.querySelector("button#cad_button");
 opencad.addEventListener("click", openCad);
-
 function openCad() {
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "none";
@@ -9,10 +10,10 @@ function openCad() {
   let openForm = document.querySelector("div.new_client_form");
   openForm.style.display = "flex";
 }
+
 // Close Register Form
 let closecad = document.querySelector("input#back_button");
 closecad.addEventListener("click", closeCad);
-
 function closeCad() {
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "flex";
@@ -21,10 +22,8 @@ function closeCad() {
   closeForm.style.display = "none";
 }
 // open Search Form
-
 let openform = document.querySelector("button#search_button");
 openform.addEventListener("click", openForm);
-
 function openForm() {
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "none";
@@ -35,7 +34,6 @@ function openForm() {
 // Close Search Form
 let closesearch = document.querySelector("input#back_button2");
 closesearch.addEventListener("click", closeForm);
-
 function closeForm() {
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "flex";
@@ -43,10 +41,9 @@ function closeForm() {
   let closeform = document.querySelector("div.search_form");
   closeform.style.display = "none";
 }
-// Buttons
+// New Patients and Search Buttons
 let button = document.querySelector("div.buttons");
 button.addEventListener("click", clickButton);
-
 function clickButton() {
   let buttons = document.querySelectorAll(".init_button");
   buttons.forEach(function (openB) {
@@ -73,11 +70,9 @@ async function displayTable() {
   var list = document.querySelector(".patients_list");
   list.innerHTML = "";
   for (i = 0; i < jsonData.length; i++) {
-    list.innerHTML += `<tr><td>${jsonData[i].name}</td><td>${jsonData[i].birthday}</td><td>${jsonData[i].adress}</td><td>${jsonData[i].city}</td><td>${jsonData[i].phone}</td><td><button id='${jsonData[i].id}' class='updateP'>Update</button> / <button onclick='deleteP(${jsonData[i].id})'>Delete</button></td></tr>`;
+    list.innerHTML += `<tr><td>${jsonData[i].name}</td><td>${jsonData[i].birthday}</td><td>${jsonData[i].adress}</td><td>${jsonData[i].city}</td><td>${jsonData[i].phone}</td><td><button onclick='updateP(${jsonData[i].id})'>Update</button> / <button onclick='deleteP(${jsonData[i].id})'>Delete</button></td></tr>`;
   }
 }
-document.addEventListener("DOMContentLoaded", displayTable);
-
 function register() {
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "flex";
@@ -101,7 +96,51 @@ function register() {
     },
     body: JSON.stringify(data),
   });
+  displayTable();
 }
+//parado aqui, update não funciona ainda
+function updateP(id) {
+  openCad();
+  // Changes to update form
+  let title = document.querySelector("h1#form_title");
+  title.innerHTML = "Update Patient";
+  let registerB = document.querySelector("input#register_button");
+  registerB.style.display = "none";
+  let updateB = document.querySelector("input#update_button");
+  updateB.style.display = "flex";
+  let idPatient = document.querySelector("input#idPatient");
+  idPatient.value = id;
+}
+async function updatePatient() {
+  var data = {
+    id: document.querySelector("#idPatient").value,
+    name: document.querySelector("#name").value,
+    birthday: document.querySelector("#birthday").value,
+    adress: document.querySelector("#adress").value,
+    city: document.querySelector("#city").value,
+    phone: document.querySelector("#phone").value,
+    operation: "update",
+  };
+  try {
+    const response = await fetch("../api/endpoint.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+
+  let closebuttons = document.querySelector("div.buttons");
+  closebuttons.style.display = "flex";
+  let closeForm = document.querySelector("div.new_client_form");
+  closeForm.style.display = "none";
+
+  displayTable();
+}
+
 // não funcionou o add event com query selector all
 function deleteP($id) {
   var data = {
@@ -117,3 +156,4 @@ function deleteP($id) {
   });
   displayTable();
 }
+function search($name) {}

@@ -5,9 +5,8 @@ require_once 'classes/patient.php';
 $data = file_get_contents('php://input');
 $json_data = json_decode($data, true);
 
-// Verificando se os dados foram recebidos corretamente
 if ($json_data) {
-    $id = $json_data['id'] ?? '';
+    $id = $json_data['id'] ?? NULL;
     $name = $json_data['name'] ?? '';
     $birthday = $json_data['birthday'] ?? '';
     $adress = $json_data['adress'] ?? '';
@@ -15,54 +14,35 @@ if ($json_data) {
     $phone = $json_data['phone'] ?? '';
     $operation = $json_data['operation'] ?? '';
 } else {
-    // Enviar uma resposta de erro ao cliente
     echo json_encode(['status' => 'error', 'message' => 'Erro ao receber dados']);
 }
 header('Content-Type: application/json');
+
 switch($operation) {
-  case 'create': // receber o JSON para cadastro do paciente
+  case 'create':
     $newP = new Patient($name, $birthday, $adress, $city, $phone);
     $newP->save();   
     break;
-  case 'list':// receber o JSON para mostrar Todos os pacientes
+  case 'list':
     $newP = new Patient($name, $birthday, $adress, $city, $phone);
-    $data = $newP->load();
+    $data = $newP->list();
     $jsonData = json_encode($data);
-    echo $jsonData;   
+    echo $jsonData;
     break; 
-  case 'update': // receber o JSON para atualizar o paciente
+  case 'update':
+    error_log("Update operation called with ID: $id, Name: $name, Birthday: $birthday, Adress: $adress, City: $city, Phone: $phone");
     $newP = new Patient($name, $birthday, $adress, $city, $phone);
-    $newP->save();
+    $data = $newP->update($id);
+    error_log("Update result: " . print_r($data, true));
+    $jsonData = json_encode($data);
+    echo $jsonData;
     break;
-  case 'delete': // receber o JSON para deletar o Paciente
+  case 'delete':
     $newP = new Patient($name, $birthday, $adress, $city, $phone);
     $newP->delete($id); 
     break;
   default:
-    //
+  json_encode(["message" => "Invalid operation."]);
     break;
 };
-
-
-// $name = 'lara';
-// $pt = new Patient('','','','','');
-// $search = $pt->load($name);
-// // var_dump($search);
-// echo "<br><br>";
-// $json = json_encode($search);
-// echo $json;
-// echo "<br><br>";
-// // var_dump(json_decode($json));
-// foreach ($search as $item) {
-//   echo "ID: " . $item['id'] . "<br>";
-//   echo "Nome: " . $item['name'] . "<br>";
-//   echo "Data de Nascimento: " . $item['birthday'] . "<br>";
-//   echo "Endereço: " . $item['adress'] . "<br>";
-//   echo "Cidade: " . $item['city'] . "<br>";
-//   echo "Telefone: " . $item['phone'] . "<br>";
-//   echo "<hr>";
-// }
-
-// mandar o JSON para exibir tds os pacientes
-
 ?>
