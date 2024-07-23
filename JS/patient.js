@@ -73,7 +73,7 @@ async function displayTable() {
     list.innerHTML += `<tr><td>${jsonData[i].name}</td><td>${jsonData[i].birthday}</td><td>${jsonData[i].adress}</td><td>${jsonData[i].city}</td><td>${jsonData[i].phone}</td><td><button onclick='updateP(${jsonData[i].id})'>Update</button> / <button onclick='deleteP(${jsonData[i].id})'>Delete</button></td></tr>`;
   }
 }
-function register() {
+async function register() {
   let closebuttons = document.querySelector("div.buttons");
   closebuttons.style.display = "flex";
 
@@ -96,7 +96,7 @@ function register() {
     },
     body: JSON.stringify(data),
   });
-  displayTable();
+  await displayTable();
 }
 //parado aqui, update não funciona ainda
 function updateP(id) {
@@ -138,11 +138,11 @@ async function updatePatient() {
   let closeForm = document.querySelector("div.new_client_form");
   closeForm.style.display = "none";
 
-  displayTable();
+  await displayTable();
 }
 
 // não funcionou o add event com query selector all
-function deleteP($id) {
+async function deleteP($id) {
   var data = {
     id: $id,
     operation: "delete",
@@ -154,6 +154,30 @@ function deleteP($id) {
     },
     body: JSON.stringify(data),
   });
-  displayTable();
+  await displayTable();
 }
-function search($name) {}
+async function searchP() {
+  const data = {
+    name: document.querySelector("input#search").value,
+    operation: "search",
+  };
+  const response = await fetch("../api/endpoint.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const jsonData = await response.json();
+
+  var list = document.querySelector(".patients_list");
+  list.innerHTML = "";
+  for (i = 0; i < jsonData.length; i++) {
+    list.innerHTML += `<tr><td>${jsonData[i].name}</td><td>${jsonData[i].birthday}</td><td>${jsonData[i].adress}</td><td>${jsonData[i].city}</td><td>${jsonData[i].phone}</td><td><button onclick='updateP(${jsonData[i].id})'>Update</button> / <button onclick='deleteP(${jsonData[i].id})'>Delete</button></td></tr>`;
+  }
+  let closebuttons = document.querySelector("div.buttons");
+  closebuttons.style.display = "flex";
+
+  let closeform = document.querySelector("div.search_form");
+  closeform.style.display = "none";
+}

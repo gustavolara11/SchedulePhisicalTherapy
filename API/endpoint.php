@@ -41,7 +41,13 @@ switch($operation) {
     $newP = new Patient($name, $birthday, $adress, $city, $phone);
     $newP->delete($id); 
     break;
-  default:
+  case 'search':
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $data = $newP->load($name);
+    $jsonData = json_encode($data);
+    echo $jsonData;
+    break; 
+    default:
   json_encode(["message" => "Invalid operation."]);
     break;
 };

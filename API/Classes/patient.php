@@ -35,7 +35,7 @@ class Patient {
   }
   public function load($name=" "){
     $connection = new Connection;
-    $sql = "SELECT * FROM `patients` WHERE `name` LIKE '%$name%' ORDER BY `name`";
+    $sql = "SELECT * FROM `patients` WHERE `name` LIKE '%{$name}%' ORDER BY `name`;";
     $query = $connection->queryR($sql);
     if(empty($query) || $query->num_rows == 0){
       echo "Usuário não encontrado.";
