@@ -193,14 +193,20 @@ main {
 /*Hover*/
 .card:hover {
   border-color: #008bf8;
-  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 18px 0 rgba(221, 221, 221, 0.8);
 }
 
 .card:hover .card-button {
   transform: translate(-50%, 50%);
   opacity: 1;
 }
-
+.shadow {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(200, 200, 200, 0.9);
+  z-index: 2;
+  display: none;
+}
 .new_client_form,
 .search_form,
 .form_schedule {
@@ -209,7 +215,14 @@ main {
   padding: 3em;
   display: none;
   flex-direction: column;
-  border: 1px solid black;
+  position: absolute;
+  background-color: #d8d8d8;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
 }
 .new_client_form form,
 .search_form form,
@@ -256,13 +269,19 @@ main {
   flex-wrap: wrap;
 }
 .patients_table_container {
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 80vw;
   align-items: center;
+  caret: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .patients_table {
   width: 80%;
+  caret: transparent;
 }
 .patients_table th {
   text-align: left;

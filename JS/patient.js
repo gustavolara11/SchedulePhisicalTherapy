@@ -9,6 +9,12 @@ function openCad() {
 
   let openForm = document.querySelector("div.new_client_form");
   openForm.style.display = "flex";
+
+  let shadow = document.querySelector("div.shadow");
+  shadow.style.display = "flex";
+
+  let buttons = document.querySelector("div.but_container");
+  buttons.style.display = "none";
 }
 
 // Close Register Form
@@ -20,6 +26,15 @@ function closeCad() {
 
   let closeForm = document.querySelector("div.new_client_form");
   closeForm.style.display = "none";
+
+  let shadow = document.querySelector("div.shadow");
+  shadow.style.display = "none";
+
+  let buttons = document.querySelector("div.but_container");
+  buttons.style.display = "flex";
+  // TENTANDO NÃO ABRIR OS BOTOES AUTOMATICAMENTE
+  // let initB = document.querySelectorAll("button.init_button");
+  // initB.style.opacity = 0;
 }
 // open Search Form
 let openform = document.querySelector("button#search_button");
@@ -30,6 +45,9 @@ function openForm() {
 
   let opensearch = document.querySelector("div.search_form");
   opensearch.style.display = "flex";
+
+  let shadow = document.querySelector("div.shadow");
+  shadow.style.display = "flex";
 }
 // Close Search Form
 let closesearch = document.querySelector("input#back_button2");
@@ -40,6 +58,9 @@ function closeForm() {
 
   let closeform = document.querySelector("div.search_form");
   closeform.style.display = "none";
+
+  let shadow = document.querySelector("div.shadow");
+  shadow.style.display = "none";
 }
 // New Patients and Search Buttons
 let button = document.querySelector("div.buttons");
@@ -55,6 +76,7 @@ function clickButton() {
     }
   });
 }
+
 // Display Patients Table
 async function displayTable() {
   const data = { operation: "list" };

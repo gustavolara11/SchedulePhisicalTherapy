@@ -2,6 +2,7 @@ let schedule = document.querySelector("button#schedule_button");
 schedule.addEventListener("click", openForm);
 
 function openForm() {
+  renderSelect();
   let form = document.querySelector("div.form_schedule");
   form.style.display = "flex";
   let button = document.querySelector("div.buttons");
@@ -22,16 +23,7 @@ function clickButton() {
     }
   });
 }
-// desenvolver o calendario
-const dayName = [
-  "sunday",
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
-];
+// Calendar
 const monthName = [
   "January",
   "February",
@@ -87,11 +79,60 @@ function renderCalendar(arry, lastday, dayweek) {
   }
   daysCalendar.innerHTML = list;
 }
-function colorLasMonth(dayweek) {
-  for (let i = 0; i >= dayweek; i++) {
-    let render = document.querySelector(`#cDay${i}`);
-    render.style.color = "#999"; //faltar arrumar cor pra mais transparente
+
+renderCalendar(aryMonth, lastDay, firstDay);
+
+// Each day Schedule
+async function renderSchedule() {
+  var data = { operation: "dailySchedule" };
+  const response = await fetch("../api/endpoint.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const jsonData = await response.json();
+  console.log(jsonData);
+  console.log(aryMonth);
+  aryMonth.forEach((element) => {
+    var day = document.querySelector("li#cDay" + element + "");
+  });
+}
+document.addEventListener("DOMContentLoaded", renderSchedule);
+// Patients names on Select
+const select = document.querySelector("select#patient_name");
+async function renderSelect() {
+  data = { operation: "select" };
+  const response = await fetch("../api/endpoint.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const jsonData = await response.json();
+
+  var list = document.querySelector("select#patient_name");
+  list.innerHTML = "";
+  for (i = 0; i < jsonData.length; i++) {
+    list.innerHTML += `<option value="${jsonData[i].id}">${jsonData[i].name}</option>`;
   }
 }
-renderCalendar(aryMonth, lastDay, firstDay);
-colorLasMonth(firstDay);
+
+// New Schedule
+async function newSchedule() {
+  var data = {
+    id: document.querySelector("select#patient_name").value,
+    date: document.querySelector("input#date").value,
+    hour: document.querySelector("input#time").value,
+    operation: "newSchedule",
+  };
+  const response = await fetch("../api/endpoint.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}

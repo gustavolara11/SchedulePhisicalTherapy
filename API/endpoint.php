@@ -12,6 +12,8 @@ if ($json_data) {
     $adress = $json_data['adress'] ?? '';
     $city = $json_data['city'] ?? '';
     $phone = $json_data['phone'] ?? '';
+    $date = $json_data['date'] ?? '';
+    $hour = $json_data['hour'] ?? '';
     $operation = $json_data['operation'] ?? '';
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Erro ao receber dados']);
@@ -47,6 +49,22 @@ switch($operation) {
     $jsonData = json_encode($data);
     echo $jsonData;
     break; 
+  case 'select':
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $data = $newP->select();
+    $jsonData = json_encode($data);
+    echo $jsonData;
+    break;
+  case 'newSchedule':
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $newP->newSchedule($id, $date, $hour);
+    break;
+  case 'dailySchedule':
+    $newP = new Patient($name, $birthday, $adress, $city, $phone);
+    $data = $newP->dailySchedule();
+    $jsonData = json_encode($data);
+    echo $jsonData;
+    break;
     default:
   json_encode(["message" => "Invalid operation."]);
     break;

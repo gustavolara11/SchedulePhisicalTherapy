@@ -12,7 +12,8 @@
       ><a href="#">Schedule</a><a href="finances.html">Finances</a
       ><a href="admin.html">Admin</a>
     </nav>
-    <main>
+    <main class="main">
+      <div class="shadow"></div>
       <div class="but_container">
         <div class="buttons" id="buttons">
           <p>+</p>
@@ -22,11 +23,9 @@
       </div>
       <div class="form_schedule">
         <h1>New Schedule</h1>
-        <form class="schedule_form" action="">
+        <form class="schedule_form">
           <label for="name">Name:</label>
-          <select name="name" id="patient_name">
-            <option value=""></option>
-          </select>
+          <select name="name" id="patient_name"></select>
           <label for="date">Date:</label>
           <input type="date" name="date" id="date" />
           <label for="time">Time:</label>
@@ -38,7 +37,7 @@
             min="8"
             max="19"
           />
-          <input type="submit" value="Submit" />
+          <button onclick="newSchedule()">Submit</button>
           <button id="back_button">Back</button>
         </form>
       </div>
@@ -46,13 +45,13 @@
       <div class="card_container2">
         <div class="calendar">
           <ul class="table_head">
+            <li>Sunday</li>
             <li>Monday</li>
             <li>Tuesday</li>
             <li>Wednesday</li>
             <li>Thursday</li>
             <li>Friday</li>
             <li>Saturday</li>
-            <li>Sunday</li>
           </ul>
           <ul id="daysMonth"></ul>
         </div>

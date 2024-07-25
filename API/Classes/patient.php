@@ -58,6 +58,32 @@ class Patient {
     $sql = "DELETE FROM `patients` WHERE `id` = $id";
     $query = $connection->queryD($sql);
   }
+  public function select(){
+    $connection = new Connection;
+    $sql = "SELECT `name`, `id` FROM `patients` ORDER BY `name`";
+    $query = $connection->queryR($sql);
+    if(empty($query) || $query->num_rows == 0){
+      echo "Usuário não encontrado.";
+    }else{
+      return mysqli_fetch_all($query, MYSQLI_ASSOC);
+    } 
+  }
+  public function newSchedule($id, $date, $hour){
+    $nHour = sprintf('%02d:00:00', $hour);
+    $connection = new Connection;
+    $sql = "INSERT INTO `schedule`(`date`, `hour`, `NameID`) VALUES ('{$date}','{$nHour}','{$id}');";
+    $connection->queryC($sql);
+  }
+  public function dailySchedule(){
+    $connection = new Connection;
+  $sql =  "SELECT p.name, s.date, s.hour FROM `schedule` s JOIN `patients` p ON s.nameID = p.id;";
+    $query = $connection->queryR($sql);
+    if(empty($query) || $query->num_rows == 0){
+      echo "Usuário não encontrado.";
+    }else{
+      return mysqli_fetch_all($query, MYSQLI_ASSOC);
+    } 
+  }
   public function getId(){
     return $this->id;
   }
