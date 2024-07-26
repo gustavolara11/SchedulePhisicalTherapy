@@ -76,7 +76,7 @@ class Patient {
   }
   public function dailySchedule(){
     $connection = new Connection;
-  $sql =  "SELECT p.name, s.date, s.hour FROM `schedule` s JOIN `patients` p ON s.nameID = p.id;";
+  $sql =  "SELECT p.name, s.date, s.hour FROM `schedule` s JOIN `patients` p ON s.nameID = p.id ORDER BY s.date;";
     $query = $connection->queryR($sql);
     if(empty($query) || $query->num_rows == 0){
       echo "Usuário não encontrado.";

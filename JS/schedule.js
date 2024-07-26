@@ -93,11 +93,40 @@ async function renderSchedule() {
     body: JSON.stringify(data),
   });
   const jsonData = await response.json();
-  console.log(jsonData);
-  console.log(aryMonth);
-  aryMonth.forEach((element) => {
-    var day = document.querySelector("li#cDay" + element + "");
-  });
+
+  var llist = document.querySelector("ul.llist");
+  llist.innerHTML = "";
+  // Date Format
+  for (let i = 0; i < jsonData.length; i++) {
+    let nDate = new Date(jsonData[i].date);
+    let nDay = nDate.getDate();
+    let nMonth = nDate.getMonth();
+    if (nDay < "10") {
+      if (nMonth < "10") {
+        var finalDate = `0${nDay}/0${nMonth}`;
+      } else {
+        var finalDate = `0${nDay}/${nMonth}`;
+      }
+    } else {
+      if (nMonth < "10") {
+        var finalDate = `${nDay}/0${nMonth}`;
+      } else {
+        var finalDate = `${nDay}/${nMonth}`;
+      }
+    }
+    // Hour Format
+    let time = jsonData[i].hour.split(":");
+    var finalHour = `${time[0]}:${time[1]}`;
+    // Name Format
+    let name = jsonData[i].name.split(" ");
+    var finalName = `${name[0]} ${name[1]}`;
+
+    llist.innerHTML += `<li>${finalDate} - ${finalHour} - ${finalName}</li>`;
+  }
+
+  //   aryMonth.forEach((element) => {
+  //     var day = document.querySelector("li#cDay" + element + "");
+  //   });
 }
 document.addEventListener("DOMContentLoaded", renderSchedule);
 // Patients names on Select

@@ -295,3 +295,29 @@ main {
 #register_button {
   display: flex;
 }
+.little_schedule {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  left: -19.5%;
+  top: 10%;
+  width: 20%;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 1em;
+  background-color: rgba(200, 200, 200, 0.4);
+  transition: 1.5s;
+}
+.little_schedule:hover {
+  left: -2%;
+}
+.lTitle {
+  margin-left: 2em;
+  text-align: right;
+}
+.llist {
+  height: auto;
+  margin-bottom: 2em;
+}
