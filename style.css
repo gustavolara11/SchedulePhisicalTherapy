@@ -139,6 +139,20 @@ main {
     translate: 0 -80px;
   }
 }
+.newMessageButton {
+  margin-left: 0.2em;
+  border: 1px solid rgba(34, 139, 34, 0.6);
+  border-radius: 50%;
+  background-color: transparent;
+  font-size: 0.5em;
+  color: rgba(34, 139, 34, 0.6);
+  cursor: pointer;
+  translate: 0 -0.25em;
+  transition: 0.2s;
+}
+.newMessageButton:hover {
+  transform: scale(1.3);
+}
 #month {
   text-align: center;
   color: #666;
@@ -233,7 +247,7 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
+  width: 90%;
   padding: 5px;
   color: #888;
   font-size: 20px;
@@ -241,13 +255,17 @@ main {
 }
 .calendar ul li,
 .table_head li {
-  width: calc(100% / 13);
-  list-style: none;
+  width: calc(100% / 17);
+  height: 1rem;
   margin: 2px;
+  padding: 30px;
+  line-height: 1rem;
+  font-size: 12pt;
+  text-align: center;
+  list-style: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  text-align: center;
-  padding: 35px;
+
   font-weight: bold;
 }
 .calendar ul li:hover {
@@ -270,7 +288,8 @@ main {
 }
 .patients_table_container {
   position: absolute;
-  display: flex;
+  /* mudar o display via JS */
+  display: none;
   flex-direction: column;
   width: 80vw;
   align-items: center;
@@ -295,6 +314,29 @@ main {
 #register_button {
   display: flex;
 }
+.patient_data_container {
+  width: 80vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  border-radius: 3em;
+  background-color: rgb(197, 197, 197);
+  box-shadow: 1px 1px 8px 3px rgba(146, 146, 146, 0.6);
+}
+.patient_data {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.date2p {
+  width: 90%;
+  height: 40%;
+  border: 1px black solid;
+  border-radius: 1em;
+}
 .little_schedule {
   position: absolute;
   display: flex;
@@ -305,19 +347,31 @@ main {
   top: 10%;
   width: 20%;
   height: auto;
-  border: 1px solid black;
+  padding-left: 1em;
   border-radius: 1em;
   background-color: rgba(200, 200, 200, 0.4);
+  box-shadow: 1px 1px 5px 2px rgba(200, 200, 200, 0.3);
   transition: 1.5s;
+  color: #666666;
 }
 .little_schedule:hover {
   left: -2%;
 }
-.lTitle {
-  margin-left: 2em;
-  text-align: right;
-}
 .llist {
   height: auto;
   margin-bottom: 2em;
+}
+.nAppoint {
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  position: relative;
+  display: flex;
+  border-radius: 50%;
+  border: 2px solid rgba(34, 139, 34, 0.6);
+  text-align: center;
+  color: rgba(34, 139, 34, 0.6);
+  left: 98%;
+  top: 50%;
+  padding: 1px 0px 1px 4px;
 }

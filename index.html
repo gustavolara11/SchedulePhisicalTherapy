@@ -17,17 +17,37 @@
 
     <main>
       <div class="card_container">
+        <div class="messages">
+          <h1 class="card_title">
+            Messages <button type="button" class="newMessageButton">+</button>
+          </h1>
+          <ul class="ul_messages">
+            <li>João - 24/09</li>
+            <li>João - 24/09</li>
+            <li>João - 24/09</li>
+            <li>João - 24/09</li>
+            <li>João - 24/09</li>
+          </ul>
+        </div>
+        <!-- Ex: voce tem 1 msg -->
         <div class="birthdays">
           <h1 class="card_title">Birthdays</h1>
         </div>
         <div class="news">
           <h1 class="card_title">News</h1>
         </div>
-        <div class="messages">
-          <h1 class="card_title">Messages</h1>
-        </div>
-        <!-- Ex: voce tem 1 msg -->
+      </div>
+      <div class="newMessageContainer">
+        <form>
+          <label for="name">Name:</label>
+          <select name="name" id="patient_name"></select>
+          <label for="date">Date:</label>
+          <input type="date" name="date" id="date" />
+          <button onclick="">Submit</button>
+          <button id="back_button">Back</button>
+        </form>
       </div>
     </main>
   </body>
+  <script src="JS/index.js"></script>
 </html>
