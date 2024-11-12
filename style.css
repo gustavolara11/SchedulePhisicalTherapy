@@ -289,7 +289,7 @@ main {
 .patients_table_container {
   position: absolute;
   /* mudar o display via JS */
-  display: none;
+  display: flex;
   flex-direction: column;
   width: 80vw;
   align-items: center;
@@ -314,7 +314,7 @@ main {
 #register_button {
   display: flex;
 }
-.patient_data_container {
+/* .patient_data_container {
   width: 80vw;
   height: 60vh;
   display: flex;
@@ -322,9 +322,9 @@ main {
   align-items: center;
   padding: 2em;
   border-radius: 3em;
-  background-color: rgb(197, 197, 197);
-  box-shadow: 1px 1px 8px 3px rgba(146, 146, 146, 0.6);
-}
+  /* background-color: rgb(197, 197, 197);
+  box-shadow: 1px 1px 8px 3px rgba(146, 146, 146, 0.6); */
+} */
 .patient_data {
   width: 90%;
   display: flex;
@@ -334,7 +334,7 @@ main {
 .date2p {
   width: 90%;
   height: 40%;
-  border: 1px black solid;
+  /* border: 1px black solid; */
   border-radius: 1em;
 }
 .little_schedule {
